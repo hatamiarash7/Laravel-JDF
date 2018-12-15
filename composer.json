@@ -1,0 +1,13 @@
+{
+    "name": "hatamiarash7/laravel-jdf",
+    "description": "JDF Library for Laravel",
+    "type": "library",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "hatamiarash7",
+            "email": "hatamiarash7@gmail.com"
+        }
+    ],
+    "require": {}
+}
