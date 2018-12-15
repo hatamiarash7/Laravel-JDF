@@ -1,13 +1,29 @@
 {
-    "name": "hatamiarash7/laravel-jdf",
-    "description": "JDF Library for Laravel",
-    "type": "library",
-    "license": "GPL-3.0",
-    "authors": [
-        {
-            "name": "hatamiarash7",
-            "email": "hatamiarash7@gmail.com"
-        }
-    ],
-    "require": {}
+  "name": "hatamiarash7/jdf",
+  "description": "JDF Library for Laravel",
+  "type": "library",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "hatamiarash7",
+      "email": "hatamiarash7@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^7.0",
+    "illuminate/support": "~5.5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Hatamiarash7\\JDF\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Hatamiarash7\\JDF\\JDFServiceProvider"
+      ]
+    }
+  }
 }
