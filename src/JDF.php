@@ -2,9 +2,9 @@
 
 namespace Hatamiarash7\JDF;
 
-class JDF
+class Generator
 {
-	public function getJalaliTimestamp()
+	public function getTimestamp()
 	{
 		$persian = $this->getDate($this->getCurrentTime()) . ' ' . $this->getTime($this->getCurrentTime());
 		$date = explode(' ', $persian)[0];
