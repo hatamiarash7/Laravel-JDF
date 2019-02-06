@@ -471,7 +471,7 @@ class Generator
 		return ($mod == 'fa') ? str_replace($num_a, $key_a, $str) : str_replace($key_a, $num_a, $str);
 	}
 
-	private function jdate_words($array, $mod = '')
+	public function jdate_words($array, $mod = '')
 	{
 		foreach ($array as $type => $num) {
 			$num = (int)$this->tr_num($num);
