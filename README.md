@@ -1,5 +1,7 @@
-
 # Laravel-JDF
+
+[![Latest Stable Version](https://poser.pugx.org/hatamiarash7/jdf/v/stable)](https://packagist.org/packages/hatamiarash7/jdf) [![Total Downloads](https://poser.pugx.org/hatamiarash7/jdf/downloads)](https://packagist.org/packages/hatamiarash7/jdf) [![License](https://poser.pugx.org/hatamiarash7/jdf/license)](https://packagist.org/packages/hatamiarash7/jdf)
+
 It's a simple library to use Persian timestamps in Laravel
 
 ### Install
