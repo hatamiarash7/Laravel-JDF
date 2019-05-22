@@ -14,9 +14,6 @@ class Generator
 
 	public function convertDate($given_date)
 	{
-		$now = date("Y-m-d", $given_date);
-		$time = date("H:i:s", $given_date);
-		$given_date = $now . ' ' . $time;
 		$persian = $this->getCDate($given_date) . ' ' . $this->getCTime($given_date);
 		$date = explode(' ', $persian)[0];
 		$time = explode(' ', $persian)[1];
