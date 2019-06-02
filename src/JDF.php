@@ -61,7 +61,7 @@ class Generator
 		return $date;
 	}
 
-	private function jdate($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
+	private function jdate($format, $timestamp = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
 	{
 		$T_sec = 0;
 
@@ -234,7 +234,7 @@ class Generator
 		return ($tr_num != 'en') ? $this->tr_num($out, 'fa', '.') : $out;
 	}
 
-	private function jstrftime($format, $timestamp = '', $none = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
+	private function jstrftime($format, $timestamp = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
 	{
 		$T_sec = 0;
 
@@ -411,7 +411,7 @@ class Generator
 		return ($tr_num != 'en') ? $this->tr_num($out, 'fa', '.') : $out;
 	}
 
-	private function jmktime($h = '', $m = '', $s = '', $jm = '', $jd = '', $jy = '', $none = '', $timezone = 'Asia/Tehran')
+	private function jmktime($h = '', $m = '', $s = '', $jm = '', $jd = '', $jy = '', $timezone = 'Asia/Tehran')
 	{
 		if ($timezone != 'local') date_default_timezone_set($timezone);
 		if ($h === '') {
@@ -446,7 +446,7 @@ class Generator
 		}
 	}
 
-	private function jgetdate($timestamp = '', $none = '', $timezone = 'Asia/Tehran', $tn = 'en')
+	private function jgetdate($timestamp = '', $timezone = 'Asia/Tehran', $tn = 'en')
 	{
 		$ts = ($timestamp === '') ? time() : $this->tr_num($timestamp);
 		$jdate = explode('_', $this->jdate('F_G_i_j_l_n_s_w_Y_z', $ts, '', $timezone, $tn));
