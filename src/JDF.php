@@ -209,7 +209,9 @@ class Generator
 					break;
 				case'W':
 					$avs = (($date[7] == 6) ? 0 : $date[7] + 1) - ($doy % 7);
-					if ($avs < 0) $avs += 7;
+					if ($avs < 0) {
+						$avs += 7;
+					}
 					$num = (int) (($doy + $avs) / 7);
 					if ($avs < 4) {
 						$num++;
@@ -217,7 +219,9 @@ class Generator
 						$num = ($avs == 4 or $avs == ((((($j_y % 33) % 4) - 2) == ((int) (($j_y % 33) * 0.05))) ? 5 : 4)) ? 53 : 52;
 					}
 					$aks = $avs + $kab;
-					if ($aks == 7) $aks = 0;
+					if ($aks == 7) {
+						$aks = 0;
+					}
 					$out .= (($kab + 363 - $doy) < $aks and $aks < 3) ? '01' : (($num < 10) ? '0'.$num : $num);
 					break;
 				case'y':
@@ -327,7 +331,9 @@ class Generator
 		$jy += 4 * ((int) ($days / 1461));
 		$days %= 1461;
 		$jy += (int) (($days - 1) / 365);
-		if ($days > 365) $days = ($days - 1) % 365;
+		if ($days > 365) {
+			$days = ($days - 1) % 365;
+		}
 		if ($days < 186) {
 			$jm = 1 + (int) ($days / 31);
 			$jd = 1 + ($days % 31);
