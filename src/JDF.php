@@ -43,8 +43,8 @@ class Generator
 	{
 		$now = explode(' ', $date)[0];
 		$time = explode(' ', $date)[1];
-		list($year, $month, $day) = explode('-', $now);
-		list($hour, $minute, $second) = explode(':', $time);
+		list($year, $month, $day) = array_map('intval', explode('-', $now));
+		list($hour, $minute, $second) = array_map('intval', explode(':', $time));
 		$timestamp = mktime($hour, $minute, $second, $month, $day, $year);
 		$date = $this->jDate("Y/m/d", $timestamp);
 		return $date;
