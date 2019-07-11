@@ -6,29 +6,29 @@ class Generator
 {
 	public function getTimestamp()
 	{
-		$persian = $this->getCDate($this->getCurrentTime()).' '.$this->getCTime($this->getCurrentTime());
+		$persian = $this->getCDate($this->getCurrentTime()) . ' ' . $this->getCTime($this->getCurrentTime());
 		$date = explode(' ', $persian)[0];
 		$time = explode(' ', $persian)[1];
-		return $date.' - '.$time;
+		return $date . ' - ' . $time;
 	}
 
 	public function convertDate($given_date)
 	{
-		$persian = $this->getCDate($given_date).' '.$this->getCTime($given_date);
+		$persian = $this->getCDate($given_date) . ' ' . $this->getCTime($given_date);
 		$date = explode(' ', $persian)[0];
 		$time = explode(' ', $persian)[1];
-		return $date.' - '.$time;
+		return $date . ' - ' . $time;
 	}
 
 	public function getTime()
 	{
-		$persian = $this->getCDate($this->getCurrentTime()).' '.$this->getCTime($this->getCurrentTime());
+		$persian = $this->getCDate($this->getCurrentTime()) . ' ' . $this->getCTime($this->getCurrentTime());
 		return explode(' ', $persian)[1];
 	}
 
 	public function getDate()
 	{
-		$persian = $this->getCDate($this->getCurrentTime()).' '.$this->getCTime($this->getCurrentTime());
+		$persian = $this->getCDate($this->getCurrentTime()) . ' ' . $this->getCTime($this->getCurrentTime());
 		return explode(' ', $persian)[0];
 	}
 
@@ -36,7 +36,7 @@ class Generator
 	{
 		$now = date("Y-m-d", time());
 		$time = date("H:i:s", time());
-		return $now.' '.$time;
+		return $now . ' ' . $time;
 	}
 
 	private function getCDate($date)
@@ -61,6 +61,12 @@ class Generator
 		return $date;
 	}
 
+	public function convertToGregorian($date)
+	{
+		$date = explode('/', $date);
+		return $this->jalali_to_gregorian($date[0], $date[1], $date[2]);
+	}
+
 	private function jdate($format, $timestamp = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
 	{
 		$T_sec = 0;
@@ -72,7 +78,7 @@ class Generator
 		$date = explode('_', date('H_i_j_n_O_P_s_w_Y', $ts));
 		list($j_y, $j_m, $j_d) = $this->gregorian_to_jalali($date[8], $date[3], $date[2]);
 		$doy = ($j_m < 7) ? (($j_m - 1) * 31) + $j_d - 1 : (($j_m - 7) * 30) + $j_d + 185;
-		$kab = (((($j_y % 33) % 4) - 1) == ((int) (($j_y % 33) * 0.05))) ? 1 : 0;
+		$kab = (((($j_y % 33) % 4) - 1) == ((int)(($j_y % 33) * 0.05))) ? 1 : 0;
 		$sl = strlen($format);
 		$out = '';
 		for ($i = 0; $i < $sl; $i++) {
@@ -106,16 +112,16 @@ class Generator
 					$out .= ($date[0] < 12) ? 'قبل از ظهر' : 'بعد از ظهر';
 					break;
 				case'b':
-					$out .= (int) ($j_m / 3.1) + 1;
+					$out .= (int)($j_m / 3.1) + 1;
 					break;
 				case'c':
-					$out .= $j_y.'/'.$j_m.'/'.$j_d.' ،'.$date[0].':'.$date[1].':'.$date[6].' '.$date[5];
+					$out .= $j_y . '/' . $j_m . '/' . $j_d . ' ،' . $date[0] . ':' . $date[1] . ':' . $date[6] . ' ' . $date[5];
 					break;
 				case'C':
-					$out .= (int) (($j_y + 99) / 100);
+					$out .= (int)(($j_y + 99) / 100);
 					break;
 				case'd':
-					$out .= ($j_d < 10) ? '0'.$j_d : $j_d;
+					$out .= ($j_d < 10) ? '0' . $j_d : $j_d;
 					break;
 				case'D':
 					$out .= $this->jdate_words(array('kh' => $date[7]), ' ');
@@ -139,10 +145,10 @@ class Generator
 					$out .= $this->jdate_words(array('rr' => $j_d), ' ');
 					break;
 				case'k';
-					$out .= $this->tr_num(100 - (int) ($doy / ($kab + 365) * 1000) / 10, $tr_num);
+					$out .= $this->tr_num(100 - (int)($doy / ($kab + 365) * 1000) / 10, $tr_num);
 					break;
 				case'K':
-					$out .= $this->tr_num((int) ($doy / ($kab + 365) * 1000) / 10, $tr_num);
+					$out .= $this->tr_num((int)($doy / ($kab + 365) * 1000) / 10, $tr_num);
 					break;
 				case'l':
 					$out .= $this->jdate_words(array('rh' => $date[7]), ' ');
@@ -151,7 +157,7 @@ class Generator
 					$out .= $kab;
 					break;
 				case'm':
-					$out .= ($j_m > 9) ? $j_m : '0'.$j_m;
+					$out .= ($j_m > 9) ? $j_m : '0' . $j_m;
 					break;
 				case'M':
 					$out .= $this->jdate_words(array('km' => $j_m), ' ');
@@ -184,7 +190,7 @@ class Generator
 					break;
 				case'r':
 					$key = $this->jdate_words(array('rh' => $date[7], 'mm' => $j_m));
-					$out .= $date[0].':'.$date[1].':'.$date[6].' '.$date[4].' '.$key['rh'].'، '.$j_d.' '.$key['mm'].' '.$j_y;
+					$out .= $date[0] . ':' . $date[1] . ':' . $date[6] . ' ' . $date[4] . ' ' . $key['rh'] . '، ' . $j_d . ' ' . $key['mm'] . ' ' . $j_y;
 					break;
 				case's':
 					$out .= $date[6];
@@ -193,7 +199,7 @@ class Generator
 					$out .= 'ام';
 					break;
 				case't':
-					$out .= ($j_m != 12) ? (31 - (int) ($j_m / 6.5)) : ($kab + 29);
+					$out .= ($j_m != 12) ? (31 - (int)($j_m / 6.5)) : ($kab + 29);
 					break;
 				case'U':
 					$out .= $ts;
@@ -212,17 +218,17 @@ class Generator
 					if ($avs < 0) {
 						$avs += 7;
 					}
-					$num = (int) (($doy + $avs) / 7);
+					$num = (int)(($doy + $avs) / 7);
 					if ($avs < 4) {
 						$num++;
 					} elseif ($num < 1) {
-						$num = ($avs == 4 or $avs == ((((($j_y % 33) % 4) - 2) == ((int) (($j_y % 33) * 0.05))) ? 5 : 4)) ? 53 : 52;
+						$num = ($avs == 4 or $avs == ((((($j_y % 33) % 4) - 2) == ((int)(($j_y % 33) * 0.05))) ? 5 : 4)) ? 53 : 52;
 					}
 					$aks = $avs + $kab;
 					if ($aks == 7) {
 						$aks = 0;
 					}
-					$out .= (($kab + 363 - $doy) < $aks and $aks < 3) ? '01' : (($num < 10) ? '0'.$num : $num);
+					$out .= (($kab + 363 - $doy) < $aks and $aks < 3) ? '01' : (($num < 10) ? '0' . $num : $num);
 					break;
 				case'y':
 					$out .= substr($j_y, 2, 2);
@@ -250,7 +256,7 @@ class Generator
 	public function jdate_words($array, $mod = '')
 	{
 		foreach ($array as $type => $num) {
-			$num = (int) $this->tr_num($num);
+			$num = (int)$this->tr_num($num);
 			switch ($type) {
 				case'ss':
 					$sl = strlen($num);
@@ -270,7 +276,7 @@ class Generator
 					}
 					$array[$type] = (($num > 99) ? str_replace(array('12', '13', '14', '19', '20')
 								, array('هزار و دویست', 'هزار و سیصد', 'هزار و چهارصد', 'هزار و نهصد', 'دوهزار')
-								, substr($num, 0, 2)).((substr($num, 2, 2) == '00') ? '' : ' و ') : '').$h3.$p34.$h34.$h4;
+								, substr($num, 0, 2)) . ((substr($num, 2, 2) == '00') ? '' : ' و ') : '') . $h3 . $p34 . $h34 . $h4;
 					break;
 				case'mm':
 					$key = array('فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند');
@@ -296,7 +302,7 @@ class Generator
 					break;
 				case'ff':
 					$key = array('بهار', 'تابستان', 'پاییز', 'زمستان');
-					$array[$type] = $key[(int) ($num / 3.1)];
+					$array[$type] = $key[(int)($num / 3.1)];
 					break;
 				case'km':
 					$key = array('فر', 'ار', 'خر', 'تی‍', 'مر', 'شه‍', 'مه‍', 'آب‍', 'آذ', 'دی', 'به‍', 'اس‍');
@@ -315,7 +321,7 @@ class Generator
 
 	private function gregorian_to_jalali($gy, $gm, $gd, $mod = '')
 	{
-		list($gy, $gm, $gd) = explode('_', $this->tr_num($gy.'_'.$gm.'_'.$gd)); /* <= Extra :اين سطر ، جزء تابع اصلي نيست */
+		list($gy, $gm, $gd) = explode('_', $this->tr_num($gy . '_' . $gm . '_' . $gd)); /* <= Extra :اين سطر ، جزء تابع اصلي نيست */
 		$g_d_m = array(0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334);
 		if ($gy > 1600) {
 			$jy = 979;
@@ -325,22 +331,52 @@ class Generator
 			$gy -= 621;
 		}
 		$gy2 = ($gm > 2) ? ($gy + 1) : $gy;
-		$days = (365 * $gy) + ((int) (($gy2 + 3) / 4)) - ((int) (($gy2 + 99) / 100)) + ((int) (($gy2 + 399) / 400)) - 80 + $gd + $g_d_m[$gm - 1];
-		$jy += 33 * ((int) ($days / 12053));
+		$days = (365 * $gy) + ((int)(($gy2 + 3) / 4)) - ((int)(($gy2 + 99) / 100)) + ((int)(($gy2 + 399) / 400)) - 80 + $gd + $g_d_m[$gm - 1];
+		$jy += 33 * ((int)($days / 12053));
 		$days %= 12053;
-		$jy += 4 * ((int) ($days / 1461));
+		$jy += 4 * ((int)($days / 1461));
 		$days %= 1461;
-		$jy += (int) (($days - 1) / 365);
+		$jy += (int)(($days - 1) / 365);
 		if ($days > 365) {
 			$days = ($days - 1) % 365;
 		}
 		if ($days < 186) {
-			$jm = 1 + (int) ($days / 31);
+			$jm = 1 + (int)($days / 31);
 			$jd = 1 + ($days % 31);
 		} else {
-			$jm = 7 + (int) (($days - 186) / 30);
+			$jm = 7 + (int)(($days - 186) / 30);
 			$jd = 1 + (($days - 186) % 30);
 		}
-		return ($mod === '') ? array($jy, $jm, $jd) : $jy.$mod.$jm.$mod.$jd;
+		return ($mod === '') ? array($jy, $jm, $jd) : $jy . $mod . $jm . $mod . $jd;
+	}
+
+	private function jalali_to_gregorian($jy, $jm, $jd, $mod = '')
+	{
+		list($jy, $jm, $jd) = explode('_', $this->tr_num($jy . '_' . $jm . '_' . $jd));
+		if ($jy > 979) {
+			$gy = 1600;
+			$jy -= 979;
+		} else {
+			$gy = 621;
+		}
+		$days = (365 * $jy) + (((int)($jy / 33)) * 8) + ((int)((($jy % 33) + 3) / 4)) + 78 + $jd + (($jm < 7) ? ($jm - 1) * 31 : (($jm - 7) * 30) + 186);
+		$gy += 400 * ((int)($days / 146097));
+		$days %= 146097;
+		if ($days > 36524) {
+			$gy += 100 * ((int)(--$days / 36524));
+			$days %= 36524;
+			if ($days >= 365) $days++;
+		}
+		$gy += 4 * ((int)(($days) / 1461));
+		$days %= 1461;
+		$gy += (int)(($days - 1) / 365);
+		if ($days > 365) $days = ($days - 1) % 365;
+		$gd = $days + 1;
+		$gm = null;
+		foreach (array(0, 31, ((($gy % 4 == 0) and ($gy % 100 != 0)) or ($gy % 400 == 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31) as $gm => $v) {
+			if ($gd <= $v) break;
+			$gd -= $v;
+		}
+		return ($mod === '') ? array($gy, $gm, $gd) : $gy . $mod . $gm . $mod . $gd;
 	}
 }
