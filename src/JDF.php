@@ -64,7 +64,8 @@ class Generator
 	public function convertToGregorian($date)
 	{
 		$date = explode('/', $date);
-		return $this->jalali_to_gregorian($date[0], $date[1], $date[2]);
+		$date = $this->jalali_to_gregorian($date[0], $date[1], $date[2]);
+		return implode('/', $date);
 	}
 
 	private function jdate($format, $timestamp = '', $time_zone = 'Asia/Tehran', $tr_num = 'fa')
