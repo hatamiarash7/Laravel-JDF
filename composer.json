@@ -21,12 +21,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Hatamiarash7\\JDF\\": "src/"
+      "Hatamiarash7\\JDF\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Hatamiarash7\\JDF\\Test\\": "tests/"
+      "Hatamiarash7\\JDF\\Test\\": "tests"
     }
   },
   "suggest": {
