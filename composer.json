@@ -23,7 +23,9 @@
     "psr-4": {
       "Hatamiarash7\\JDF\\": "src"
     },
-    "classmap": []
+    "classmap": [
+      "src"
+    ]
   },
   "autoload-dev": {
     "psr-4": {
