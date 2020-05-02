@@ -8,23 +8,22 @@ use Orchestra\Testbench\TestCase as Orchestra;
 
 class JDFTest extends Orchestra
 {
-	/**
-	 * add the package provider
-	 *
-	 * @param $app
-	 * @return array
-	 */
-	protected function getPackageProviders($app)
-	{
-		return [JDFServiceProvider::class];
-	}
+    /**
+     * add the package provider
+     *
+     * @param $app
+     * @return array
+     */
+    protected function getPackageProviders($app)
+    {
+        return [JDFServiceProvider::class];
+    }
 
-	/** @test */
-	public function test_functions()
-	{
-		$jdf = new Generator();
+    /** @test */
+    public function test_functions()
+    {
+        $jdf = new Generator();
 
-		$this->assertEquals(['2016', '8', '1'], $jdf->convertToGregorian("۱۳۹۵/۰۵/۱۱"));
-	}
+        $this->assertEquals(['2016', '8', '1'], $jdf->convertToGregorian("۱۳۹۵/۰۵/۱۱"));
+    }
 }
-
